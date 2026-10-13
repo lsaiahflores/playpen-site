@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download Playpen for Windows</title>
+<meta name="description" content="Download Playpen for Windows. Free. Version, size and SHA-256 checksum shown for every release.">
+<meta name="theme-color" content="#08090c">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://*.supabase.co https://api.github.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+<link rel="canonical" href="https://playpen.site/download/">
+<link rel="icon" type="image/svg+xml" href="../img/favicon.svg">
+<link rel="stylesheet" href="../css/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Playpen">
+<meta property="og:title" content="Download Playpen for Windows">
+<meta property="og:description" content="Download Playpen for Windows. Free. Version, size and SHA-256 checksum shown for every release.">
+<meta property="og:url" content="https://playpen.site/download/">
+<meta property="og:image" content="https://playpen.site/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Playpen logo on a black background, with the words: Say what you want to make. Play it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Download Playpen for Windows">
+<meta name="twitter:description" content="Download Playpen for Windows. Free. Version, size and SHA-256 checksum shown for every release.">
+<meta name="twitter:image" content="https://playpen.site/img/og.png">
+<script src="../js/boot.js"></script>
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="../"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Playpen</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../#how">How it works</a>
+      <a href="../parents/">For parents</a>
+      <a href="../faq/">FAQ</a>
+      <a class="btn primary" href="../download/" aria-current="page">Download</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="wrap">
+  <div class="page-head">
+    <p class="eyebrow">Download</p>
+    <h1>Playpen for Windows</h1>
+    <p class="lede">Free. Windows 10 or 11, 64-bit. Mac and Linux aren’t available yet.</p>
+  </div>
+  <div class="prose">
+    <div class="dl-card" id="dl-live" data-repo="lsaiahflores/playpen-releases">
+      <div>
+        <dl class="dl-meta">
+          <dt>Version</dt><dd id="dl-version">Checking…</dd>
+          <dt>Size</dt><dd id="dl-size">&nbsp;</dd>
+          <dt>File</dt><dd id="dl-file">&nbsp;</dd>
+          <dt>SHA-256</dt><dd id="dl-sha">&nbsp;</dd>
+        </dl>
+        <p class="muted" id="dl-status" role="status"></p>
+      </div>
+      <a class="btn primary" id="dl-button" href="https://github.com/lsaiahflores/playpen-releases/releases/latest">Download for Windows</a>
+    </div>
+    <p class="muted">The installer comes from this project’s public releases page on GitHub. Nothing is signed up for or tracked here.</p>
+
+    <h2>What you need</h2>
+    <ul>
+      <li><b>Windows 10 or 11</b>, 64-bit.</li>
+      <li><b>Memory:</b> 8 GB works with a small local model. 16 GB or more is better. 32 GB runs the bigger models well.</li>
+      <li><b>Disk space:</b> a few gigabytes for Playpen’s tools and a first model, and more if you choose a bigger local model.</li>
+      <li><b>Internet</b> for the first-time setup, and for Claude if you use it.</li>
+      <li><b>For Claude or Hybrid mode:</b> a paid Claude plan (Pro, Max, Team or Enterprise) or an API account, since Claude Code needs one. Local mode needs no account.</li>
+    </ul>
+
+    <h2>If Windows says it protected your PC</h2>
+    <p>When you run the installer, Windows may show a blue box that says <i>Windows protected your PC</i>. Click <b>More info</b>, then <b>Run anyway</b>.</p>
+    <p>This happens because Playpen’s installer isn’t code-signed yet. Code-signing certificates cost money, and Playpen is free and just getting started. Windows shows that warning for any new, unsigned app.</p>
+    <p>To check that your file is the real one, compare its checksum with the SHA-256 shown above. In PowerShell:</p>
+    <p><code>Get-FileHash .\Playpen-Setup-*.exe -Algorithm SHA256</code></p>
+
+    <h2>After you install</h2>
+    <p>The first time you open Playpen it sets up the tools it needs and picks a local model that fits your computer. That takes a few minutes and needs the internet. After that you just say what you want to make.</p>
+  </div>
+</div>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div><a class="brand" href="../"><img src="../img/logo-mark.svg" alt="" width="26" height="26"><span>Playpen</span></a></div>
+    <nav aria-label="Footer">
+      <a href="../download/">Download</a>
+      <a href="../parents/">For parents</a>
+      <a href="../faq/">FAQ</a>
+      <a href="mailto:hello@playpen.site">Contact</a>
+    </nav>
+    <p class="foot-small">Playpen is free to use. It makes games and apps on your own computer. hello@playpen.site</p>
+  </div>
+</footer>
+<script src="../js/download.js" defer></script>
+</body>
+</html>

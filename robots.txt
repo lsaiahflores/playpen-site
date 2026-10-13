@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /terms/
+Disallow: /privacy/
+Disallow: /play/
+
+Sitemap: https://playpen.site/sitemap.xml

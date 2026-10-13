@@ -1,0 +1,7 @@
+{
+  "name": "playpen-site-tools",
+  "private": true,
+  "description": "Build + test helpers for playpen.site. Not part of the published site.",
+  "scripts": { "build": "node build.js", "test": "node test-site.js" },
+  "devDependencies": { "qrcode": "^1.5.4", "jsqr": "^1.4.0", "html-validate": "^8.24.0" }
+}

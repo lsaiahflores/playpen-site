@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30 -34 60 68" width="60" height="68">
+  <g fill="none" stroke="#f2f2f5" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="0" y1="-29" x2="25.98" y2="-14"/><line x1="25.98" y1="-14" x2="0" y2="1"/>
+    <line x1="0" y1="1" x2="-25.98" y2="-14"/><line x1="-25.98" y1="-14" x2="0" y2="-29"/>
+    <line x1="0" y1="-1" x2="25.98" y2="14"/><line x1="25.98" y1="14" x2="0" y2="29"/>
+    <line x1="0" y1="29" x2="-25.98" y2="14"/><line x1="-25.98" y1="14" x2="0" y2="-1"/>
+    <line x1="25.98" y1="-14" x2="25.98" y2="14"/><line x1="0" y1="1" x2="0" y2="29"/>
+    <line x1="-25.98" y1="-14" x2="-25.98" y2="14"/><line x1="0" y1="-29" x2="0" y2="-1"/>
+  </g>
+  <polygon points="-13,-19 -13,19 21,0" fill="#f2f2f5"/>
+  <polygon points="-10,-15 -10,15 17,0" fill="#08090c"/>
+</svg>

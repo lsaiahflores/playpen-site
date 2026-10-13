@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playpen: say what you want to make, then play it</title>
+<meta name="description" content="Playpen is a free Windows app that builds real games and apps from a conversation, with no setup.">
+<meta name="theme-color" content="#08090c">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://*.supabase.co https://api.github.com; base-uri 'self'; form-action 'self'; object-src 'none'">
+<link rel="canonical" href="https://playpen.site/">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="stylesheet" href="css/site.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Playpen">
+<meta property="og:title" content="Playpen: say what you want to make, then play it">
+<meta property="og:description" content="Playpen is a free Windows app that builds real games and apps from a conversation, with no setup.">
+<meta property="og:url" content="https://playpen.site/">
+<meta property="og:image" content="https://playpen.site/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Playpen logo on a black background, with the words: Say what you want to make. Play it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Playpen: say what you want to make, then play it">
+<meta name="twitter:description" content="Playpen is a free Windows app that builds real games and apps from a conversation, with no setup.">
+<meta name="twitter:image" content="https://playpen.site/img/og.png">
+<script src="js/boot.js"></script>
+</head>
+<body class="">
+<a class="skip" href="#main">Skip to the content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="img/logo-mark.svg" alt="" width="26" height="26"><span>Playpen</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="./#how">How it works</a>
+      <a href="parents/">For parents</a>
+      <a href="faq/">FAQ</a>
+      <a class="btn primary" href="download/">Download</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 id="hero-title">Say what you want to make. Play it.</h1>
+      <p class="lede">Playpen is a free Windows app that builds real games and apps from a conversation, with no setup.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="download/">Download for Windows</a>
+        <a class="btn" href="#beta">Join the beta</a>
+      </div>
+      <p class="hero-note">Windows 10 or 11. Free to use. Claude features use your own Claude subscription.</p>
+    </div>
+    <div class="galaxy">
+      <div class="galaxy-stage" id="galaxy-stage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="What Playpen does. Use the left and right arrow keys, drag, or the numbered buttons to move around.">
+        <canvas id="galaxy" aria-hidden="true"></canvas>
+      </div>
+      <div class="galaxy-caption" id="galaxy-caption" aria-live="off">
+        <div class="cap-no" id="cap-no">1 / 10</div>
+        <h2 id="cap-title">Hybrid: local and Claude, together</h2>
+        <p id="cap-text">Playpen’s own AI and your Claude subscription share the work. Or use either one on its own.</p>
+      </div>
+      <ol class="stations" id="stations"></ol>
+      <p class="galaxy-hint">Drag, swipe, or use the arrow keys to turn it.</p>
+      <div class="nojs-stations prose" hidden>
+        <ol>
+          <li><b>Hybrid.</b> Playpen’s own AI and your Claude subscription share the work, or work alone.</li>
+          <li><b>A project that remembers itself.</b> Every piece keeps its own notes on your computer.</li>
+          <li><b>Nothing to set up.</b> Playpen gets its own tools ready the first time you open it.</li>
+          <li><b>Test it as it’s built.</b> Your game runs inside Playpen. Controllers work.</li>
+          <li><b>Send it to your phone.</b> Scan a code. Same Wi‑Fi.</li>
+          <li><b>Talk it into existence.</b> Say what you want and Playpen builds it.</li>
+          <li><b>Build real games.</b> Platformers, shooters, racing and more.</li>
+          <li><b>Plan ahead, any time.</b> With Claude or fully local.</li>
+          <li><b>See your code, simply.</b> One file at a time, in plain English.</li>
+          <li><b>Built for kids, run by a parent.</b> A PIN-protected Child Lock.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rule" id="demo" aria-labelledby="demo-title">
+  <div class="wrap">
+    <div class="demo-head">
+      <div>
+        <p class="eyebrow">Watch a build</p>
+        <h2 id="demo-title">One game, start to finish</h2>
+      </div>
+      <p>A recreation of the Playpen window, sped up. The game in it is made up for this page.</p>
+    </div>
+    <div class="demo-layout">
+      <div>
+        <div class="app" id="demo-app" data-mode="local">
+          <div class="app-bar">
+            <div class="app-title"><img src="img/logo-mark.svg" alt="" width="18" height="18">Playpen</div>
+            <div class="seg" id="app-mode" aria-hidden="true"><span data-m="local" class="on">Local</span><span data-m="hybrid">Hybrid</span><span data-m="claude">Claude</span></div>
+            <div class="app-tabs" aria-hidden="true"><span class="tab on" data-t="chat">Chat</span><span class="tab" data-t="plan">Plan</span></div>
+            <div class="app-actions" aria-hidden="true"><span class="app-chip" id="app-phone">Send to phone</span></div>
+            <div class="toast" id="app-toast" aria-hidden="true"></div>
+          </div>
+          <div class="app-body" aria-hidden="true">
+            <div class="pane terminal"><div class="pane-head"><span>Terminal</span><span>Playpen + Claude Code</span></div><div class="term-lines" id="term-lines"></div></div>
+            <div class="pane chat">
+              <div class="pane-head"><span>Chat</span><span>Hybrid</span></div>
+              <div class="chat-scroll" id="chat-scroll"></div>
+              <div class="progress" id="build-progress"><i></i></div>
+              <div class="plan-view" id="plan-view">
+                <div class="planhead">Plan</div>
+                <div class="mod">
+                  <h4>Redesign main character</h4>
+                  <ul><li>Swap the round blob for a fox</li><li>Keep the same size and speed</li><li>Test that the chase still feels fair</li></ul>
+                  <span class="go">Build</span>
+                </div>
+              </div>
+            </div>
+            <div class="pane test"><div class="pane-head"><span>Test</span><span>Hedgerow Chase</span></div><div class="test-canvas"><canvas id="test-canvas"></canvas><span class="test-tag" id="test-tag"></span></div></div>
+          </div>
+        </div>
+        <div class="demo-controls">
+          <button class="btn" id="demo-play" type="button" aria-pressed="false">Play</button>
+          <button class="btn" id="demo-replay" type="button">Replay</button>
+          <span class="demo-steps" id="demo-steps"><button class="btn" id="demo-prev" type="button">Previous step</button><button class="btn" id="demo-next" type="button">Next step</button></span>
+          <button class="btn" id="demo-mute" type="button" aria-pressed="true">Sound off</button>
+          <span class="sped">Sped up</span>
+        </div>
+        <p class="demo-caption" id="demo-caption" aria-live="polite"></p>
+        <details class="transcript">
+          <summary>Read what happens in the demo</summary>
+          <ol>
+            <li>You switch Playpen to Hybrid mode.</li>
+            <li>You say: &ldquo;Make me a 3D maze-chase game.&rdquo;</li>
+            <li>The terminal opens. Playpen’s local AI and Claude Code shake hands. Playpen saves a restore point first.</li>
+            <li>They build the game together. Simpler pieces go to the local model and harder ones go to Claude Code. Each line in the terminal says which one wrote it.</li>
+            <li>The voice assistant says: &ldquo;Your game is ready to test.&rdquo;</li>
+            <li>The test pane opens and the game is playing.</li>
+            <li>You ask for a new look for the main character. Your Claude usage limit is reached.</li>
+            <li>You switch to Local, open the Plan tab, and plan a &ldquo;redesign main character&rdquo; module with the local model.</li>
+            <li>Claude usage comes back. You send the module to the build, and the game plays again with a fox as the hero.</li>
+            <li>You send the game to your phone.</li>
+          </ol>
+        </details>
+      </div>
+      <aside class="qr-card" aria-label="Play a sample on your phone">
+        <div class="qr"><img src="img/qr-play.svg" alt="QR code that opens the sample play page on this site" width="172" height="172"></div>
+        <h3>Try it on your phone</h3>
+        <p>Scan this with your phone’s camera. It opens a page on this site and runs in your phone’s browser, with touch controls.</p>
+        <p class="placeholder-note muted">A real Playpen-made game will live here. For now it opens a stand-in page.</p>
+        <p><a href="play/maze/">Open it here instead</a></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="rule" id="how" aria-labelledby="how-title">
+  <div class="wrap how-grid">
+    <div>
+      <p class="eyebrow">How it works</p>
+      <h2 id="how-title">You choose who does the building</h2>
+      <p class="lede">Playpen has three modes. Try each one.</p>
+      <div class="mode-toggle" id="mode-toggle" role="radiogroup" aria-label="Playpen mode">
+        <span class="thumb" aria-hidden="true"></span>
+        <button type="button" role="radio" aria-checked="false" data-mode="local" tabindex="-1">Local</button>
+        <button type="button" role="radio" aria-checked="true" data-mode="hybrid" tabindex="0">Hybrid</button>
+        <button type="button" role="radio" aria-checked="false" data-mode="claude" tabindex="-1">Claude</button>
+      </div>
+      <div class="mode-panel" id="mode-panel" aria-live="polite">
+        <h3>Two builders on one project</h3>
+        <p>Playpen splits a build into pieces. Simpler coding goes to the local model, in the terminal. Harder, higher-level work goes to Claude. You get more done and use less of your Claude usage.</p>
+      </div>
+      <template data-mode="local">
+        <h3>Everything on your computer</h3>
+        <p>A local AI model runs on your own PC through Ollama. It’s free, it’s private, and once Playpen is set up it works with no internet. How well it builds depends on your hardware and the model. A 32 GB PC can run bigger, stronger models.</p>
+        <ul><li>No account needed.</li><li>Your projects and prompts stay on your computer.</li><li>You can still plan, build and test, just with a smaller brain.</li></ul>
+      </template>
+      <template data-mode="hybrid">
+        <h3>Two builders on one project</h3>
+        <p>Playpen splits a build into pieces. Simpler coding goes to the local model, in the terminal. Harder, higher-level work goes to Claude. You get more done and use less of your Claude usage.</p>
+        <ul><li>Each piece goes to whichever builder fits it best.</li><li>You can always push a piece up to Claude. Playpen never quietly drops a hard piece down to the local model.</li><li>If Claude’s usage runs out, flip to Local and keep planning.</li></ul>
+      </template>
+      <template data-mode="claude">
+        <h3>Full power, your own account</h3>
+        <p>Playpen is built on Claude Code. In Claude mode it uses your own Claude subscription directly, on your computer. Your account is never proxied or shared.</p>
+        <ul><li>Claude Code needs a paid Claude plan (Pro, Max, Team or Enterprise) or an API account.</li><li>The strongest results, for the biggest builds.</li><li>Your requests go to Claude, exactly as if you ran Claude Code yourself.</li></ul>
+      </template>
+    </div>
+    <div class="under">
+      <h3>What’s underneath</h3>
+      <dl>
+        <div class="row"><dt>A desktop app</dt><dd>Playpen is an Electron app that runs on your PC.</dd></div>
+        <div class="row"><dt>Claude Code</dt><dd>The Claude side runs through Claude Code, installed and signed in on your machine.</dd></div>
+        <div class="row"><dt>A local model</dt><dd>Ollama runs the local AI on your computer. Playpen picks one that fits your PC.</dd></div>
+        <div class="row"><dt>Restore points</dt><dd>Playpen saves your project with git before every build, so you can always go back.</dd></div>
+        <div class="row"><dt>A brain per project</dt><dd>Each project keeps its notes, plans and history in a folder on your computer. That is what gives every request its context.</dd></div>
+        <div class="row"><dt>No Playpen servers</dt><dd>Nothing runs on our servers, because we don’t have any. Your projects live on your computer.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="signup" id="beta" aria-labelledby="beta-title">
+  <div class="wrap signup-grid">
+    <div>
+      <p class="eyebrow">Beta</p>
+      <h2 id="beta-title">We’re looking for beta testers.</h2>
+    </div>
+    <form id="beta-form" novalidate>
+      <div class="form-row">
+        <label class="sr" for="beta-email">Email address</label>
+        <input id="beta-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+        <button class="btn primary" id="beta-submit" type="submit">Join the beta</button>
+      </div>
+      <label class="check"><input id="beta-updates" type="checkbox" name="wants_updates"><span>Send me updates</span></label>
+      <p class="form-note">We keep your email address, whether you ticked the box, and the date. We use it to invite you to the beta and, if you ticked the box, to tell you what’s new. Email hello@playpen.site and we’ll delete it.</p>
+      <p class="form-status" id="beta-status" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section class="why" aria-labelledby="why-title">
+  <div class="wrap">
+    <p class="eyebrow" id="why-title">Why it exists</p>
+    <p>Playpen started with a dad trying to teach his son to make a real game, and spending a week on setup the kid would never need.</p>
+    <p>Powerful AI tools shouldn’t be locked behind cost or setup. So Playpen is free, and it sets itself up.</p>
+  </div>
+</section>
+</main>
+<footer class="site-foot">
+  <div class="wrap">
+    <div><a class="brand" href="./"><img src="img/logo-mark.svg" alt="" width="26" height="26"><span>Playpen</span></a></div>
+    <nav aria-label="Footer">
+      <a href="download/">Download</a>
+      <a href="parents/">For parents</a>
+      <a href="faq/">FAQ</a>
+      <a href="mailto:hello@playpen.site">Contact</a>
+    </nav>
+    <p class="foot-small">Playpen is free to use. It makes games and apps on your own computer. hello@playpen.site</p>
+  </div>
+</footer>
+<script src="js/galaxy.js" defer></script>
+<script src="js/demo.js" defer></script>
+<script src="js/toggle.js" defer></script>
+<script src="js/config.js" defer></script>
+<script src="js/signup.js" defer></script>
+</body>
+</html>
