@@ -92,7 +92,7 @@ function staticTests() {
     const src = fs.readFileSync(f, 'utf8');
     for (const m of src.matchAll(/https?:\/\/[a-z0-9.-]+/gi)) {
       const h = m[0].replace(/^https?:\/\//, '').toLowerCase();
-      if (/^(playpen\.site|api\.github\.com|github\.com|www\.w3\.org|.*\.supabase\.co|localhost|127\.0\.0\.1)/.test(h) || /^(\*|abcdefghijkl)/.test(h)) continue;
+      if (/^(playpen\.site|play\.playpen\.site|api\.github\.com|github\.com|www\.w3\.org|.*\.supabase\.co|localhost|127\.0\.0\.1)/.test(h) || /^(\*|abcdefghijkl)/.test(h)) continue;
       ext.push([rel(f), h]);
     }
   }
@@ -354,17 +354,17 @@ async function browserTests() {
     for (const [name, p] of [['download', '/download/'], ['parents', '/parents/'], ['faq', '/faq/'], ['terms', '/terms/'], ['privacy', '/privacy/'], ['404', '/nope-not-here/'], ['play', '/play/maze/']]) {
       await pg.go(base + p, { width: 1280, height: 900 });
       const hosts = hostsOf(pg.requests.filter((r) => !/^data:/.test(r.url)));
-      const allowed = name === 'download' ? (h) => h === `127.0.0.1:${PORT}` || h === 'api.github.com' : (h) => h === `127.0.0.1:${PORT}`;
-      t(`${name}: only this site is contacted${name === 'download' ? ' (plus the GitHub releases API, by design)' : ''}`, hosts.every(allowed), hosts);
+      const allowed = name === 'download' ? (h) => h === `127.0.0.1:${PORT}` || h === 'api.github.com' : name === 'play' ? (h) => h === `127.0.0.1:${PORT}` || h === 'play.playpen.site' : (h) => h === `127.0.0.1:${PORT}`;
+      t(`${name}: only this site is contacted${name === 'download' ? ' (plus the GitHub releases API, by design)' : name === 'play' ? ' (plus the game at play.playpen.site, by design)' : ''}`, hosts.every(allowed), hosts);
       t(`${name}: no console errors`, pg.console.filter((c) => !(name === '404' && /404/.test(c))).length === 0, pg.console);
       await pg.shot('page-' + name + '-desktop');
       await pg.go(base + p, { width: 390, height: 844, mobile: true });
       const ov = await pg.ev(`return document.documentElement.scrollWidth - document.documentElement.clientWidth;`);
       t(`${name} (phone): no horizontal scroll`, ov <= 1, ov);
     }
-    // the placeholder game: moves with the buttons
+    // the game page frames the real game at play.playpen.site
     await pg.go(base + '/play/maze/', { width: 390, height: 844, mobile: true });
-    t('play placeholder: a canvas, touch buttons, and a clear "Placeholder" banner', await pg.ev(`return !!document.getElementById('game') && document.querySelectorAll('.dpad button').length===4 && /Placeholder/.test(document.querySelector('.game-banner').textContent);`) === true);
+    t('play page: a full-screen frame onto the game at play.playpen.site, with fullscreen allowed', await pg.ev(`const f=document.querySelector('iframe.game-frame'); return !!f && f.src==='https://play.playpen.site/index.html' && /fullscreen/.test(f.allow);`) === true);
 
     /* ---------- download button against the REAL releases API */
     await pg.go(base + '/download/', { width: 1280, height: 900 });

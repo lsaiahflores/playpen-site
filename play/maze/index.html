@@ -3,24 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sample game (placeholder) | Playpen</title>
+<title>Space Cat | Playpen</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#08090c">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; frame-src https://play.playpen.site; base-uri 'self'; object-src 'none'">
 <link rel="icon" type="image/svg+xml" href="../../img/favicon.svg">
 <link rel="stylesheet" href="../../css/site.css">
 </head>
 <body class="game-page">
-<!-- PLACEHOLDER. Replace this whole folder (play/maze/) with a real Playpen-built HTML5 export; see play/README.md. -->
+<!-- The game itself lives at https://play.playpen.site/ (a Playpen-built web export). This page only frames it, so the QR code's URL
+     never changes and updating the game never touches this site. See play/README.md. -->
 <header><a class="brand" href="../../"><img src="../../img/logo-mark.svg" alt="" width="26" height="26"><span>Playpen</span></a><a class="btn" href="../../">Back to playpen.site</a></header>
-<p class="game-banner"><b>Placeholder.</b> This stands in for a real game made with Playpen. It only proves that the page, the QR code and touch controls work.</p>
-<div class="game-stage"><canvas id="game" width="450" height="450" role="img" aria-label="A small maze. Move the green dot with the arrow buttons, the arrow keys, or by swiping."></canvas></div>
-<div class="dpad" role="group" aria-label="Controls">
-  <button type="button" class="up" data-d="-1,0" aria-label="Up">&uarr;</button>
-  <button type="button" class="left" data-d="0,-1" aria-label="Left">&larr;</button>
-  <button type="button" class="down" data-d="1,0" aria-label="Down">&darr;</button>
-  <button type="button" class="right" data-d="0,1" aria-label="Right">&rarr;</button>
-</div>
-<script src="../../js/play.js" defer></script>
+<iframe class="game-frame" src="https://play.playpen.site/index.html" title="Space Cat" allow="fullscreen; autoplay; gamepad; accelerometer; gyroscope" allowfullscreen></iframe>
+<noscript><p class="game-banner">This game needs JavaScript. It also opens directly at <a href="https://play.playpen.site/index.html">play.playpen.site</a>.</p></noscript>
 </body>
 </html>
