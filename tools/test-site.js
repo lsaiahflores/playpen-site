@@ -55,7 +55,7 @@ function staticTests() {
   const dupIds = [];
   for (const f of htmlFiles) { const ids = [...fs.readFileSync(f, 'utf8').matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]); ids.forEach((id, i) => { if (ids.indexOf(id) !== i) dupIds.push([rel(f), id]); }); }
   t('no duplicate ids on any page', dupIds.length === 0, dupIds);
-  t('every page has one h1', htmlFiles.filter((f) => !/play\\maze|play\/maze/.test(f)).every((f) => (fs.readFileSync(f, 'utf8').match(/<h1[\s>]/g) || []).length === 1));
+  t('every page has one h1', htmlFiles.filter((f) => !/play\\maze|play\/maze|play\\space_cat|play\/space_cat/.test(f)).every((f) => (fs.readFileSync(f, 'utf8').match(/<h1[\s>]/g) || []).length === 1));
   t('every page declares a language and a viewport', htmlFiles.every((f) => { const h = fs.readFileSync(f, 'utf8'); return /<html lang="en"/.test(h) && /name="viewport"/.test(h); }));
 
   // 3. HTML validation
@@ -116,20 +116,29 @@ function staticTests() {
   t('no secrets in the site: no service_role key, no tokens', !files.some((f) => /\.(js|html|md|sql|json)$/.test(f) && /service_role\s*[:=]\s*["']ey|gh[pousr]_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}/.test(fs.readFileSync(f, 'utf8'))));
   t('the beta config ships with empty placeholders (not connected)', /SUPABASE_URL: ""/.test(fs.readFileSync(path.join(ROOT, 'js', 'config.js'), 'utf8')) && /SUPABASE_ANON_KEY: ""/.test(fs.readFileSync(path.join(ROOT, 'js', 'config.js'), 'utf8')));
 
-  // 9. the QR really decodes to the play URL
+  // 9. the QR really decodes to the play URL, with the Space Cat face laid over its middle
   try {
     const QR = require('qrcode'), jsQR = require('jsqr');
-    const url = 'https://playpen.site/play/maze/';
-    const qr = QR.create(url, { errorCorrectionLevel: 'M' });
+    const url = 'https://playpen.site/play/space_cat/';
+    const qr = QR.create(url, { errorCorrectionLevel: 'H' });
     const n = qr.modules.size, scale = 6, q = 4, dim = (n + q * 2) * scale;
     const data = new Uint8ClampedArray(dim * dim * 4).fill(255);
-    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (qr.modules.data[y * n + x]) for (let yy = 0; yy < scale; yy++) for (let xx = 0; xx < scale; xx++) { const i = (((y + q) * scale + yy) * dim + (x + q) * scale + xx) * 4; data[i] = data[i + 1] = data[i + 2] = 0; }
+    const logoD = Math.round(n * 0.25) % 2 === n % 2 ? Math.round(n * 0.25) : Math.round(n * 0.25) + 1;
+    const c = n / 2;
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+      if (!qr.modules.data[y * n + x] || Math.hypot(x + 0.5 - c, y + 0.5 - c) < logoD / 2 + 0.9) continue;
+      for (let yy = 0; yy < scale; yy++) for (let xx = 0; xx < scale; xx++) { const i = (((y + q) * scale + yy) * dim + (x + q) * scale + xx) * 4; data[i] = data[i + 1] = data[i + 2] = 0; }
+    }
+    /* the face itself is a busy picture: paint a mid-grey disc over the cleared middle as the worst case a scanner has to ignore */
+    const cx = (c + q) * scale, rpx = (logoD / 2) * scale;
+    for (let y = 0; y < dim; y++) for (let x = 0; x < dim; x++) if (Math.hypot(x - cx, y - cx) < rpx) { const i = (y * dim + x) * 4; data[i] = data[i + 1] = data[i + 2] = ((x + y) % 7 < 3) ? 40 : 200; }
     const res = jsQR(data, dim, dim);
     t('the QR code decodes to the play URL', !!res && res.data === url, res && res.data);
     const svg = fs.readFileSync(path.join(ROOT, 'img', 'qr-play.svg'), 'utf8');
+    t('the shipped QR image carries the Space Cat face and the same URL', svg.includes(url) && svg.includes('<image ') && svg.includes('data:image/png;base64,'), svg.length);
     const rects = (svg.match(/<rect x=/g) || []).length;
-    let dark = 0; for (let i = 0; i < qr.modules.data.length; i++) if (qr.modules.data[i]) dark++;
-    t('the shipped QR image is the same code (module count matches)', rects === dark && svg.includes(url), [rects, dark]);
+    let dark = 0; for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) if (qr.modules.data[y * n + x] && Math.hypot(x + 0.5 - c, y + 0.5 - c) >= logoD / 2 + 0.9) dark++;
+    t('the shipped QR image is the same code (module count matches)', rects === dark, [rects, dark]);
   } catch (e) { t('QR decode test ran', false, e.message); }
 }
 
@@ -351,7 +360,7 @@ async function browserTests() {
     await pg.shot('home-desktop-reduced');
 
     /* ---------- the other pages */
-    for (const [name, p] of [['download', '/download/'], ['parents', '/parents/'], ['faq', '/faq/'], ['terms', '/terms/'], ['privacy', '/privacy/'], ['404', '/nope-not-here/'], ['play', '/play/maze/']]) {
+    for (const [name, p] of [['download', '/download/'], ['parents', '/parents/'], ['faq', '/faq/'], ['terms', '/terms/'], ['privacy', '/privacy/'], ['404', '/nope-not-here/'], ['play', '/play/space_cat/']]) {
       await pg.go(base + p, { width: 1280, height: 900 });
       const hosts = hostsOf(pg.requests.filter((r) => !/^data:/.test(r.url)));
       const allowed = name === 'download' ? (h) => h === `127.0.0.1:${PORT}` || h === 'api.github.com' : name === 'play' ? (h) => h === `127.0.0.1:${PORT}` || h === 'play.playpen.site' : (h) => h === `127.0.0.1:${PORT}`;
@@ -363,7 +372,7 @@ async function browserTests() {
       t(`${name} (phone): no horizontal scroll`, ov <= 1, ov);
     }
     // the game page frames the real game at play.playpen.site
-    await pg.go(base + '/play/maze/', { width: 390, height: 844, mobile: true });
+    await pg.go(base + '/play/space_cat/', { width: 390, height: 844, mobile: true });
     t('play page: a full-screen frame onto the game at play.playpen.site, with fullscreen allowed', await pg.ev(`const f=document.querySelector('iframe.game-frame'); return !!f && f.src==='https://play.playpen.site/index.html' && /fullscreen/.test(f.allow);`) === true);
 
     /* ---------- download button against the REAL releases API */

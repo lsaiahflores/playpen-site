@@ -192,10 +192,10 @@ add({
         </details>
       </div>
       <aside class="qr-card" aria-label="Play the game on your phone">
-        <div class="qr"><img src="img/qr-play.svg" alt="QR code that opens the game" width="172" height="172"></div>
-        <h3>Try it on your phone</h3>
-        <p>Scan this with your phone’s camera. It opens Space Cat, a game made with Playpen, right in your phone’s browser, with touch controls.</p>
-        <p><a href="play/maze/">Play it here instead</a></p>
+        <div class="qr"><img src="img/qr-play.svg" alt="QR code, with the Space Cat face in the middle, that opens the game" width="172" height="172"></div>
+        <h3>After zero setup: instant play</h3>
+        <p>Test an app as soon as it’s ready, right inside Playpen, or click the QR code button and play it on your phone. Try out Space Cat, a real game made with Playpen.</p>
+        <p><a href="play/space_cat/">Play it here instead</a></p>
       </aside>
     </div>
   </div>
@@ -500,8 +500,24 @@ const game = `<!DOCTYPE html>
 </body>
 </html>
 `;
+fs.mkdirSync(path.join(ROOT, 'play', 'space_cat'), { recursive: true });
+fs.writeFileSync(path.join(ROOT, 'play', 'space_cat', 'index.html'), game);
+/* the old address (printed codes, shared links) keeps working: it forwards to the new one */
+const old = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Space Cat | Playpen</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0; url=../space_cat/">
+<link rel="canonical" href="${SITE}/play/space_cat/">
+</head>
+<body><h1>Space Cat has moved</h1><p>This page has moved to <a href="../space_cat/">playpen.site/play/space_cat</a>.</p></body>
+</html>
+`;
 fs.mkdirSync(path.join(ROOT, 'play', 'maze'), { recursive: true });
-fs.writeFileSync(path.join(ROOT, 'play', 'maze', 'index.html'), game);
+fs.writeFileSync(path.join(ROOT, 'play', 'maze', 'index.html'), old);
 
 /* sitemap: indexable pages only (the drafts are noindex and left out) */
 const indexable = pages.filter((p) => !p.noindex).map((p) => '/' + p.file.replace(/index\.html$/, ''));
