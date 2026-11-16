@@ -11,8 +11,9 @@ const url = process.argv[2] || 'https://playpen.site/play/space_cat/';
 const qr = QR.create(url, { errorCorrectionLevel: 'H' });
 const n = qr.modules.size, q = 2, dim = n + q * 2;
 const face = fs.readFileSync(path.join(__dirname, '..', 'img', 'space-cat-face.png')).toString('base64');
-/* the face covers a disc of about 25% of the code's width: well inside what level H can lose */
-const logoD = Math.round(n * 0.25) % 2 === n % 2 ? Math.round(n * 0.25) : Math.round(n * 0.25) + 1;
+/* the face covers a disc of about a third of the code's width (a big, cute face): about 13% of the modules, well inside what level H can lose */
+const FACE = 0.34;
+const logoD = Math.round(n * FACE) % 2 === n % 2 ? Math.round(n * FACE) : Math.round(n * FACE) + 1;
 const c = dim / 2;
 let rects = '';
 for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {

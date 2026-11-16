@@ -123,7 +123,8 @@ function staticTests() {
     const qr = QR.create(url, { errorCorrectionLevel: 'H' });
     const n = qr.modules.size, scale = 6, q = 4, dim = (n + q * 2) * scale;
     const data = new Uint8ClampedArray(dim * dim * 4).fill(255);
-    const logoD = Math.round(n * 0.25) % 2 === n % 2 ? Math.round(n * 0.25) : Math.round(n * 0.25) + 1;
+    const FACE = 0.34;
+    const logoD = Math.round(n * FACE) % 2 === n % 2 ? Math.round(n * FACE) : Math.round(n * FACE) + 1;
     const c = n / 2;
     for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
       if (!qr.modules.data[y * n + x] || Math.hypot(x + 0.5 - c, y + 0.5 - c) < logoD / 2 + 0.9) continue;
